@@ -10,7 +10,7 @@ var processes = ['mongod', 'app.js 0', 'app.js 1', 'app.js 2', 'demenses.js'];
 var niceP = ['MongoDB', 'Dragon', 'Defiant', 'Dragon\'s Teeth', 'Demenses']
 console.log("Service Status:");
 processes.forEach(function(pro, ind){
-	var count = exec("ps aux | grep '"+pro+"'").toString().split("\n") - 1;
+	var count = exec("ps aux | grep '"+pro+"'").toString().split("\n").length -2;
 	if(count > 0){
 		console.log("\t"+niceP[ind]+" up".green);
 	} else {
@@ -21,5 +21,5 @@ var expT = exec("openssl s_client -connect demenses.net:443 < /dev/null 2>/dev/n
 var expM = moment(expT, "MMM  D HH:mm:ss 2018").utcOffset(0);
 console.log("SSL certificate:\n\tExpires "+moment().to(expM).red);
 //Call hddtemp and diskspace scripts. Not written by me, but taken from https github.com/Heholord/FalconStats
-console.log(exec("sudo node hddtemp.js").toString());
-console.log(exec("sudo node "+__dirname+"/diskspace.js").toString());
+//console.log(exec("node /home/nicohman/demstats/hddtemp.js").toString());
+console.log(exec("node "+__dirname+"/diskspace.js").toString());
